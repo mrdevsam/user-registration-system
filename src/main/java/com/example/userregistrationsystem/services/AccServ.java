@@ -7,4 +7,5 @@ public interface AccServ {
 	void saveOrUpdateAcc(AccDTO accdto);
 	Account findAccByEmail(String email);
 	List<AccDTO> findAllAccounts();
+	void deleteAccByEmail(String email);
 }
