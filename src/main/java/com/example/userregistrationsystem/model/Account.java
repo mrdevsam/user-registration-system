@@ -22,19 +22,19 @@ public class Account {
 
 	@NotEmpty
 	@NotNull
-	private String user_first_name;
+	private String userFirstName;
 
 	@NotEmpty
 	@NotNull
-	private String user_last_name;
+	private String userLastName;
 
 	@Email
-	private String user_email;
+	private String userEmail;
 
 	@NotNull
 	@NotEmpty
 	@Min(value=8, message="Minimum size is 8.")
-	private String user_password;
+	private String userPassword;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinTable(

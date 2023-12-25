@@ -8,16 +8,16 @@ import jakarta.validation.constraints.*;
 public class AccDTO {
 
 	@NotEmpty
-	private String user_first_name;
+	private String userFirstName;
 
 	@NotEmpty
-	private String user_last_name;
+	private String userLastName;
 
 	@Email
 	@NotEmpty(message = "Email should not be empty")
-	private String user_email;
+	private String userEmail;
 
 	@NotEmpty
 	@Min(value=8, message="Minimum size is 8.")
-	private String user_password;
+	private String userPassword;
 }
