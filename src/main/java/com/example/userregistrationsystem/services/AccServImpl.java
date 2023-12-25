@@ -8,7 +8,9 @@ public class AccServImpl implements AccServ {
 
 	private final AccountRepo arepo;
 
-	
+	public AccServImpl(AccountRepo arepo) {
+		this.arepo = arepo;
+	}
 
 	@Override
 	public void saveOrUpdateAcc(AccDTO accdto) {
