@@ -20,4 +20,6 @@ public class AccDTO {
 	@NotEmpty
 	@Min(value=8, message="Minimum size is 8.")
 	private String userPassword;
+
+	private boolean admin;
 }
