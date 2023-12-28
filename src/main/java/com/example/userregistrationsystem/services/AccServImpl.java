@@ -2,9 +2,12 @@ package com.example.userregistrationsystem.services;
 
 import com.example.userregistrationsystem.model.*;
 import com.example.userregistrationsystem.repositories.*;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class AccServImpl implements AccServ {
 
 	private final AccountRepo arepo;
@@ -32,7 +35,8 @@ public class AccServImpl implements AccServ {
 
 	@Override
 	public Account findAccByEmail(String email) {
-		return arepo.findByUserEmail(email).get();
+		return arepo.findByUserEmail(email);
+		
 	}
 
 	@Override
@@ -51,7 +55,7 @@ public class AccServImpl implements AccServ {
 
 	private Role checkForRole(boolean bl) {
 		if(bl == true) {
-			Role arl = rrepo.findByName("ROLE_ADMIN").get();
+			Role arl = rrepo.findByName("ROLE_ADMIN");
 
 			if(arl == null) {
 				Role brl = new Role();
@@ -62,7 +66,7 @@ public class AccServImpl implements AccServ {
 			}
 			
 		} else {
-			Role url = rrepo.findByName("ROLE_USER").get();
+			Role url = rrepo.findByName("ROLE_USER");
 
 			if(url == null) {
 				Role vrl = new Role();
@@ -81,4 +85,5 @@ public class AccServImpl implements AccServ {
 		accdto.setUserEmail(acc.getUserEmail());
 		return accdto;
 	}
+
 }

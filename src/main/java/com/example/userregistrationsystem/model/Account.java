@@ -33,7 +33,7 @@ public class Account {
 
 	@NotNull
 	@NotEmpty
-	@Min(value=8, message="Minimum size is 8.")
+	@Size(min=8, message="Minimum size is 8.")
 	private String userPassword;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)

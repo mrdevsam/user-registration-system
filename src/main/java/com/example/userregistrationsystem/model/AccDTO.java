@@ -18,7 +18,7 @@ public class AccDTO {
 	private String userEmail;
 
 	@NotEmpty
-	@Min(value=8, message="Minimum size is 8.")
+	@Size(min=8, message="Minimum size is 8.")
 	private String userPassword;
 
 	private boolean admin;

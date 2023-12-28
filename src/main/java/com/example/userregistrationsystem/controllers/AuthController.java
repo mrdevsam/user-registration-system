@@ -14,15 +14,43 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AuthController {
 
+	private final AccServ serv;
+
+	public AuthController(AccServ serv) {
+		this.serv = serv;
+	}
+	
 	@GetMapping({"","/","/index"})
 	public String homepage() {
 		log.info("at index page");
 		return "/index";
 	}
 
-	// @GetMapping("/registration")
-	// public String registration_page() {
-	// 	log.info("at registration page");
-	// 	return null;
-	// }
+	@GetMapping("/register")
+	public String registration_page(Model model) {
+		log.info("accessing registration page");
+		//creating a model object to store form data
+		AccDTO acc = new AccDTO();
+		model.addAttribute("user", acc);
+		return "register";
+	}
+
+	@PostMapping("/register/save")
+	public String proccess_registration(@Valid @ModelAttribute("user") AccDTO acc, BindingResult rs, Model ml) {
+		Account existingAcc = serv.findAccByEmail(acc.getUserEmail());
+
+		//checking if the user with same email exists or not in the database
+		if(existingAcc != null && existingAcc.getUserEmail() != null && !existingAcc.getUserEmail().isEmpty()) {
+			rs.rejectValue("userEmail", null, "This email is associated with another account");
+		}
+
+		if(rs.hasErrors()) {
+			ml.addAttribute("user", acc);
+			return "register";
+		}
+
+		//if there are no errors with the provided data, then save those.
+		serv.saveOrUpdateAcc(acc);
+		return "redirect:/register?success";
+	}
 }
