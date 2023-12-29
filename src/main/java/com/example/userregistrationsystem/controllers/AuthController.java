@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
 
 @Controller
@@ -52,5 +53,18 @@ public class AuthController {
 		//if there are no errors with the provided data, then save those.
 		serv.saveOrUpdateAcc(acc);
 		return "redirect:/register?success";
+	}
+
+	@GetMapping("/users")
+	public String showUsers(Model model) {
+		List<AccDTO> accounts = serv.findAllAccounts();
+		model.addAttribute("users", accounts);
+		log.info("showing details of all users");
+		return "users";
+	}
+
+	@GetMapping("/login")
+	public String login() {
+		return "login";
 	}
 }
