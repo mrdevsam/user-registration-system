@@ -36,7 +36,7 @@ public class Account {
 	@Size(min=8, message="Minimum size is 8.")
 	private String userPassword;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(
 		name="account_roles",
 		joinColumns={

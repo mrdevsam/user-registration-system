@@ -65,6 +65,7 @@ public class AuthController {
 
 	@GetMapping("/login")
 	public String login() {
+		log.info("at login page");
 		return "login";
 	}
 }

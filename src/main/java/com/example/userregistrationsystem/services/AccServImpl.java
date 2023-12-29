@@ -4,6 +4,7 @@ import com.example.userregistrationsystem.model.*;
 import com.example.userregistrationsystem.repositories.*;
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -12,10 +13,12 @@ public class AccServImpl implements AccServ {
 
 	private final AccountRepo arepo;
 	private final RoleRepo rrepo;
+	private final PasswordEncoder encoder;
 
-	public AccServImpl(AccountRepo arepo, RoleRepo rrepo) {
+	public AccServImpl(AccountRepo arepo, RoleRepo rrepo, PasswordEncoder encoder) {
 		this.arepo = arepo;
 		this.rrepo = rrepo;
+		this.encoder = encoder;
 	}
 
 	@Override
@@ -24,7 +27,8 @@ public class AccServImpl implements AccServ {
 		new_acc.setUserFirstName(accdto.getUserFirstName());
 		new_acc.setUserLastName(accdto.getUserLastName());
 		new_acc.setUserEmail(accdto.getUserEmail());
-		new_acc.setUserPassword(accdto.getUserPassword());
+		// new_acc.setUserPassword(accdto.getUserPassword());
+		new_acc.setUserPassword(encoder.encode(accdto.getUserPassword()));
 
 		Role role = new Role();
 		role = checkForRole(accdto.isAdmin());
